@@ -19,6 +19,7 @@ Ele permite automatizar tarefas, melhorar o desempenho e manter o sistema limpo 
 
 ```bash
 python main.py
+
 💻 Como gerar o executável (.exe)
 bash
 Copiar
