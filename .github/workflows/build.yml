@@ -25,9 +25,3 @@ jobs:
 
       - name: Compilar main.py com PyInstaller
         run: pyinstaller --onefile main.py
-
-      - name: Upload do EXE como artefato
-        uses: actions/upload-artifact@v3
-        with:
-          name: otimizador-ntz-exe
-          path: dist/main.exe
