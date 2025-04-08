@@ -27,7 +27,8 @@ jobs:
         run: pyinstaller --onefile main.py
 
       - name: Upload do EXE como artefato
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@c85c95e9c74b6231ddab6d12c46c8487c4e3be04
         with:
           name: otimizador-ntz-exe
           path: dist/main.exe
+                  
