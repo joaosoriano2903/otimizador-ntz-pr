@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
-from gui import otimizacao_sistema  # importa a GUI real
+from gui import otimizacao_sistema,limpeza_sistema   # importa a GUI real
+
 
 def limpar_temporarios():
     """Função para limpeza de arquivos temporários (placeholder)."""
@@ -36,7 +37,8 @@ def iniciar_interface():
 
     # Botões com ações reais e futuras
     botoes = [
-        ("🧹 Limpeza Temporária", limpar_temporarios),
+    ("🧰 Otimização de Sistema", lambda: otimizacao_sistema.abrir_otimizacao_sistema(main_frame)),
+    ("🧹 Limpeza", lambda: limpeza_sistema.abrir_limpeza(main_frame)),
         ("🌐 Otimizar Rede", otimizar_rede),
         ("🧰 Otimização de Sistema", gerenciar_servicos),
         ("🖥️ Info do Sistema", info_sistema),
