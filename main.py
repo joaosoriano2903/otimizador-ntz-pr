@@ -1,4 +1,4 @@
-from gui import painel_principal
+from gui import menu_principal
 
 if __name__ == "__main__":
-    painel_principal.iniciar_interface()
+    menu_principal.iniciar_interface()
