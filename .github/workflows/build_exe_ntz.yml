@@ -25,8 +25,11 @@ jobs:
       - name: 🏗️ Compilar main.py com PyInstaller
         run: pyinstaller --onefile main.py
 
-      - name: 📤 Upload do .exe como artefato
-        uses: actions/upload-artifact@v2
-        with:
-          name: ntz-pro-exe
-          path: dist/main.exe
+      - name: 📦 Compactar o executável
+        run: |
+          mkdir artifacts
+          powershell Compress-Archive -Path dist/main.exe -DestinationPath artifacts/ntz-pro-exe.zip
+
+      - name: 📤 Fazer upload do artefato manualmente
+        run: |
+          echo "Artefato gerado: artifacts/ntz-pro-exe.zip"
