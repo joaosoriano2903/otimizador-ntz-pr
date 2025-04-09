@@ -1,4 +1,1 @@
-flake8
-pytest
-
-pyinstaller
+altgraph==0.17.4packaging==24.2pefile==2023.2.7Pillow==11.1.0psutil==7.0.0pyinstaller==6.1.2pyinstaller-hooks-contrib==2025.2pywin32==310pywin32-ctypes==0.2.3setuptools==78.1.0watchdog==6.0.0WMI==1.5.1
