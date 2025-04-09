@@ -5,7 +5,7 @@ Pillow==11.1.0
 psutil==7.0.0
 pyinstaller
 pyinstaller-hooks-contrib==2025.2
-pywin32==310
+pywin32
 pywin32-ctypes==0.2.3
 setuptools==78.1.0
 watchdog==6.0.0
