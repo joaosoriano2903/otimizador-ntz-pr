@@ -37,10 +37,9 @@ def iniciar_interface():
 
     # Botões com ações reais e futuras
     botoes = [
-    ("🧰 Otimização de Sistema", lambda: otimizacao_sistema.abrir_otimizacao_sistema(main_frame)),
-    ("🧹 Limpeza", lambda: limpeza_sistema.abrir_limpeza(main_frame)),
+        ("🧰 Otimização de Sistema", lambda: otimizacao_sistema.abrir_otimizacao_sistema(root)),
+        ("🧹 Limpeza", lambda: limpeza_sistema.abrir_limpeza(root)),
         ("🌐 Otimizar Rede", otimizar_rede),
-        ("🧰 Otimização de Sistema", gerenciar_servicos),
         ("🖥️ Info do Sistema", info_sistema),
         ("❌ Sair", sair)
     ]
