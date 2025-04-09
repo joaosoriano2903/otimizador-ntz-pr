@@ -27,7 +27,7 @@ jobs:
         run: pyinstaller --noconfirm --onefile main.py
 
       - name: 📤 Upload do .exe como artefato
-        uses: actions/upload-artifact@v3
+        uses: uses: actions/upload-artifact@v3.0.0
         with:
           name: ntz-pro-exe
           path: dist/main.exe
