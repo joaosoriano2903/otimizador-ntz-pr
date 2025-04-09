@@ -42,7 +42,7 @@ def iniciar_interface():
         ("🌐 Otimizar Rede", otimizar_rede),
         ("🖥️ Info do Sistema", info_sistema),
         ("❌ Sair", sair)
-    ]
+    ] 
 
     for texto, comando in botoes:
         tk.Button(root, text=texto, width=30, command=comando).pack(pady=5)
