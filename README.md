@@ -20,15 +20,19 @@ Ele permite automatizar tarefas, melhorar o desempenho e manter o sistema limpo 
 ```bash
 python main.py
 
+
+
+
 💻 Como gerar o executável (.exe)
 bash
-Copiar
-Editar
 pyinstaller --onefile main.py
 O arquivo será gerado na pasta dist/main.exe.
 
-🔁 CI/CD
 
+
+
+
+🔁 CI/CD
 
 Este projeto possui:
 
