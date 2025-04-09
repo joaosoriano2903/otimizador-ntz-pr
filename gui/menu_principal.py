@@ -25,7 +25,7 @@ def iniciar_interface():
     # Botões do menu principal
     botoes = [
         ("🧰 Otimização de Sistema", lambda: otimizacao_sistema.abrir_otimizacao_sistema(root)),
-        ("🧹 Limpeza", lambda: limpeza_sistema.abrir_limpeza(main_frame)),
+        ("🧹 Limpeza", lambda: limpeza_sistema.abrir_limpeza(root)),
         ("🌐 Otimizar Rede", otimizar_rede),
         ("🖥️ Info do Sistema", info_sistema),
         ("❌ Sair", sair)
