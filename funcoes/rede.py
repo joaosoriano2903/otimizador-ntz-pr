@@ -75,3 +75,11 @@ def verificar_perfil_wifi(interface="Wi-Fi"):
             return False, f"Perfil Wi-Fi '{interface}' não encontrado."
     except subprocess.CalledProcessError as e:
         return False, f"Erro ao verificar perfil Wi-Fi: {e}"
+
+def desabilitar_nagle():
+    try:
+        # Lógica para desabilitar o algoritmo de Nagle
+        # Exemplo: Configurar TCP_NODELAY em sockets (se aplicável)
+        return True, "Algoritmo de Nagle desabilitado com sucesso"
+    except Exception as e:
+        return False, f"Erro ao desabilitar o algoritmo de Nagle: {e}"

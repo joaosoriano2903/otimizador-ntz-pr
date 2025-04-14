@@ -2,27 +2,63 @@ import tkinter as tk
 import platform
 import socket
 import getpass
-import psutil  # Biblioteca para informações de hardware e sistema
+import psutil
 
 try:
-    import wmi  # Biblioteca para informações detalhadas no Windows
+    import wmi
 except ImportError:
-    wmi = None  # Caso não esteja no Windows ou a biblioteca não esteja instalada
+    wmi = None
+
+monitorando = False
 
 
 def abrir_info(master_frame):
-    # Limpa os widgets existentes no frame
+    global monitorando
+    monitorando = False
+
     for widget in master_frame.winfo_children():
         widget.destroy()
 
-    # Título
-    tk.Label(master_frame, text="🖥️ Informações do Sistema", font=("Helvetica", 14, "bold"), bg="#f8f8f8").pack(pady=15)
+    tk.Label(master_frame, text="🖥️ Informações do Sistema", font=("Helvetica", 16, "bold"), bg="#f8f8f8").pack(pady=15)
 
-    # Caixa de texto para exibir as informações
-    info_text = tk.Text(master_frame, height=25, width=80, bg="black", fg="lime", insertbackground="white", wrap="word")
+    info_text = tk.Text(master_frame, height=20, width=80, bg="black", fg="lime", insertbackground="white", wrap="word")
     info_text.pack(pady=10)
 
-    # Coleta as informações do sistema
+    infos = coletar_informacoes_sistema()
+    for info in infos:
+        info_text.insert(tk.END, f"> {info}\n")
+
+    info_text.config(state="disabled")
+
+    botoes_frame = tk.Frame(master_frame, bg="#f8f8f8")
+    botoes_frame.pack(pady=10)
+
+    tk.Button(
+        botoes_frame,
+        text="Copiar Informações",
+        command=lambda: copiar_para_area_transferencia(master_frame, infos),
+        bg="#4CAF50",
+        fg="white",
+        relief="flat",
+        font=("Helvetica", 10, "bold"),
+        width=20
+    ).grid(row=0, column=0, padx=5, pady=5)
+
+    tk.Button(
+        botoes_frame,
+        text="Atualizar Informações",
+        command=lambda: abrir_info(master_frame),
+        bg="#2196F3",
+        fg="white",
+        relief="flat",
+        font=("Helvetica", 10, "bold"),
+        width=20
+    ).grid(row=0, column=1, padx=5, pady=5)
+
+    monitorar_sistema(master_frame)
+
+
+def coletar_informacoes_sistema():
     battery = psutil.sensors_battery()
     battery_status = (
         f"Status da Bateria: {battery.percent}% {'(Carregando)' if battery.power_plugged else '(Descarregando)'}"
@@ -32,30 +68,6 @@ def abrir_info(master_frame):
         f"Tempo Restante: {battery.secsleft // 3600}h {battery.secsleft % 3600 // 60}m"
         if battery and battery.secsleft != psutil.POWER_TIME_UNLIMITED else "Tempo Restante: Indeterminado"
     )
-
-    # Informações detalhadas da bateria no Windows (usando WMI)
-    if wmi:
-        try:
-            c = wmi.WMI(namespace="root\\WMI")
-            full_capacity = next(iter(c.BatteryFullChargedCapacity()), None)
-            status = next(iter(c.BatteryStatus()), None)
-            if full_capacity and status:
-                battery_cycles = status.CycleCount if hasattr(status, "CycleCount") else "Não disponível"
-                battery_capacity = full_capacity.FullChargedCapacity
-                battery_remaining = status.RemainingCapacity
-                battery_details = [
-                    f"Ciclos de Carga: {battery_cycles}",
-                    f"Capacidade Total (mWh): {battery_capacity}",
-                    f"Capacidade Restante (mWh): {battery_remaining}",
-                ]
-            else:
-                battery_details = ["Informações detalhadas da bateria não disponíveis."]
-        except Exception as e:
-            battery_details = [f"Erro ao obter informações detalhadas da bateria: {e}"]
-    else:
-        battery_details = ["Informações detalhadas da bateria não disponíveis (WMI não instalado ou não no Windows)."]
-
-    # Informações gerais do sistema
     infos = [
         f"Sistema Operacional: {platform.system()} {platform.release()}",
         f"Nome do Computador: {socket.gethostname()}",
@@ -69,21 +81,34 @@ def abrir_info(master_frame):
         f"Disco Livre: {round(psutil.disk_usage('/').free / (1024 ** 3), 2)} GB",
         battery_status,
         battery_time,
-    ] + battery_details
+    ]
+    return infos
 
-    # Insere as informações na caixa de texto
-    for info in infos:
-        info_text.insert(tk.END, f"> {info}\n")
 
-    # Desabilita a edição da caixa de texto
-    info_text.config(state="disabled")
+def copiar_para_area_transferencia(master_frame, infos):
+    master_frame.clipboard_clear()
+    master_frame.clipboard_append("\n".join(infos))
+    master_frame.update()
+    tk.messagebox.showinfo("Copiado", "As informações foram copiadas para a área de transferência!")
 
-    # Função para copiar as informações para a área de transferência
-    def copiar_para_area_transferencia():
-        master_frame.clipboard_clear()
-        master_frame.clipboard_append("\n".join(infos))
-        master_frame.update()  # Atualiza o clipboard
-        tk.messagebox.showinfo("Copiado", "As informações foram copiadas para a área de transferência!")
 
-    # Botão para copiar as informações
-    tk.Button(master_frame, text="Copiar Informações", command=copiar_para_area_transferencia, bg="#4CAF50", fg="white", relief="flat", width=20).pack(pady=10)
+def monitorar_sistema(master_frame):
+    global monitorando
+    monitorando = True
+
+    cpu_label = tk.Label(master_frame, text="CPU: 0%", font=("Helvetica", 12), bg="#f8f8f8")
+    cpu_label.pack(pady=5)
+    ram_label = tk.Label(master_frame, text="RAM: 0%", font=("Helvetica", 12), bg="#f8f8f8")
+    ram_label.pack(pady=5)
+
+    def atualizar_monitoramento():
+        while monitorando:
+            try:
+                cpu_label.config(text=f"CPU: {psutil.cpu_percent()}%")
+                ram_label.config(text=f"RAM: {psutil.virtual_memory().percent}%")
+                master_frame.update_idletasks()
+            except tk.TclError:
+                break
+
+    import threading
+    threading.Thread(target=atualizar_monitoramento, daemon=True).start()
