@@ -15,17 +15,27 @@ class GitAutoCommitHandler(FileSystemEventHandler):
         print(f"🔄 Detectada modificação em: {nome_arquivo}")
 
         try:
+            # Adiciona as alterações ao índice
             subprocess.run(["git", "add", "."], cwd=PASTA_PROJETO, check=True)
 
+            # Verifica se há alterações para commit
             result = subprocess.run(["git", "status", "--porcelain"], cwd=PASTA_PROJETO, capture_output=True, text=True)
             if result.stdout.strip() == "":
                 print("⏸️ Nenhuma alteração detectada para commit.")
                 return
 
+            # Realiza o commit
             subprocess.run(["git", "commit", "-m", f"📌 Auto: Alterado {nome_arquivo}"], cwd=PASTA_PROJETO, check=True)
-            subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=PASTA_PROJETO, check=True)
-            subprocess.run(["git", "push", "origin", "main"], cwd=PASTA_PROJETO, check=True)
-            print("✅ Alterações enviadas para o GitHub.")
+
+            # Garante que está na branch 1.1.0
+            subprocess.run(["git", "checkout", "1.1.0"], cwd=PASTA_PROJETO, check=True)
+
+            # Atualiza a branch local com o repositório remoto
+            subprocess.run(["git", "pull", "--rebase", "origin", "1.1.0"], cwd=PASTA_PROJETO, check=True)
+
+            # Envia as alterações para o repositório remoto
+            subprocess.run(["git", "push", "origin", "1.1.0"], cwd=PASTA_PROJETO, check=True)
+            print("✅ Alterações enviadas para a branch '1.1.0' no GitHub.")
         except subprocess.CalledProcessError as e:
             print(f"⚠️ Falha ao executar Git: {e}")
 
