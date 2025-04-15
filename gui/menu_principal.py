@@ -1,6 +1,8 @@
 import tkinter as tk
 from PIL import ImageTk, Image
 from gui import otimizacao_sistema, limpeza_sistema, info_sistema, rede_sistema
+
+
 import os
 
 def iniciar_interface():
