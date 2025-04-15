@@ -1,0 +1,26 @@
+TERMOS DE USO E LICENÇA DE SOFTWARE
+
+Este Termo de Uso rege a instalação e o uso do software "SystemOptimizer", desenvolvido por NTZ Solutions, doravante denominado "Software".
+
+1. LICENÇA DE USO
+O Software é licenciado e não vendido. O usuário recebe uma licença pessoal, intransferível e não exclusiva para instalar e utilizar o Software em seus dispositivos, exclusivamente para fins lícitos e pessoais.
+
+2. PROPRIEDADE INTELECTUAL
+O Software, incluindo seu código-fonte, design gráfico, estrutura, marca, logotipo, ícones e demais elementos, constitui propriedade intelectual protegida pelas leis nacionais e internacionais de direitos autorais, sendo de titularidade exclusiva da NTZ Solutions. É proibida a engenharia reversa, cópia, modificação, distribuição, reprodução, comercialização ou qualquer outro uso não autorizado.
+
+3. RESTRIÇÕES
+É vedado ao usuário:
+- Distribuir, revender ou sublicenciar o Software sem autorização expressa;
+- Utilizar o Software para fins ilícitos ou que infrinjam os direitos de terceiros;
+- Tentar modificar ou remover qualquer aviso de propriedade intelectual incluído no Software.
+
+4. LIMITAÇÃO DE RESPONSABILIDADE
+O Software é fornecido "no estado em que se encontra", sem garantias explícitas ou implícitas de qualquer natureza. A NTZ Solutions não se responsabiliza por perdas, danos diretos ou indiretos, falhas no sistema, perda de dados, lucro cessante ou qualquer outro prejuízo decorrente do uso ou da incapacidade de uso do Software.
+
+5. ACEITAÇÃO
+Ao prosseguir com a instalação, o usuário declara estar ciente e de acordo com os termos acima.
+
+6. SUPORTE E ATUALIZAÇÕES
+A NTZ Solutions poderá, a seu critério, oferecer suporte técnico e atualizações para o Software, não estando obrigada a isso.
+
+© 2025 NTZ Solutions. Todos os direitos reservados.
